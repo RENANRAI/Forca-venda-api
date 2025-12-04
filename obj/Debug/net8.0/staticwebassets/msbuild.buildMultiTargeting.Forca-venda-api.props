@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Forca-venda-api.props" />
+</Project>

@@ -1,0 +1,277 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|d:\\projetos\\forca-venda\\forca-venda-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\integration\\erp\\clienteerpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:integration\\erp\\clienteerpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\services\\clientesyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:services\\clientesyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\controllers\\sincronizacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:controllers\\sincronizacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\integration\\erp\\clienteerpdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:integration\\erp\\clienteerpdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\integration\\erp\\iclienteerpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:integration\\erp\\iclienteerpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\entities\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:entities\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\background\\clientesyncbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:background\\clientesyncbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\data\\forcavendascontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:data\\forcavendascontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\models\\clientedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:models\\clientedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\entities\\pedidoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:entities\\pedidoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\entities\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:entities\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\entities\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:entities\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|D:\\Projetos\\Forca-venda\\Forca-venda-api\\forca-venda-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{21EFB05F-88E0-49B8-9396-F6F330FB2D0F}|Forca-venda-api.csproj|solutionrelative:forca-venda-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClienteErpService.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Integration\\Erp\\ClienteErpService.cs",
+              "RelativeDocumentMoniker": "Integration\\Erp\\ClienteErpService.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Integration\\Erp\\ClienteErpService.cs",
+              "RelativeToolTip": "Integration\\Erp\\ClienteErpService.cs",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAiwHwAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:40:02.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IClienteErpService.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Integration\\Erp\\IClienteErpService.cs",
+              "RelativeDocumentMoniker": "Integration\\Erp\\IClienteErpService.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Integration\\Erp\\IClienteErpService.cs",
+              "RelativeToolTip": "Integration\\Erp\\IClienteErpService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:39:14.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClienteErpDto.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Integration\\Erp\\ClienteErpDto.cs",
+              "RelativeDocumentMoniker": "Integration\\Erp\\ClienteErpDto.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Integration\\Erp\\ClienteErpDto.cs",
+              "RelativeToolTip": "Integration\\Erp\\ClienteErpDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:36:17.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ForcaVendasContext.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Data\\ForcaVendasContext.cs",
+              "RelativeDocumentMoniker": "Data\\ForcaVendasContext.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Data\\ForcaVendasContext.cs",
+              "RelativeToolTip": "Data\\ForcaVendasContext.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAA5wCAAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T18:14:30.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Forca-venda-api.csproj",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Forca-venda-api.csproj",
+              "RelativeDocumentMoniker": "Forca-venda-api.csproj",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Forca-venda-api.csproj",
+              "RelativeToolTip": "Forca-venda-api.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-03T18:11:52.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PedidoItem.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\PedidoItem.cs",
+              "RelativeDocumentMoniker": "Entities\\PedidoItem.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\PedidoItem.cs",
+              "RelativeToolTip": "Entities\\PedidoItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T18:13:42.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T13:01:12.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SincronizaController.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Controllers\\SincronizaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SincronizaController.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Controllers\\SincronizaController.cs",
+              "RelativeToolTip": "Controllers\\SincronizaController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:46:36.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientesController.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Controllers\\ClientesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Controllers\\ClientesController.cs",
+              "RelativeToolTip": "Controllers\\ClientesController.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAA1wEgAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T13:07:05.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAgwBMAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-03T18:15:45.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClienteSyncService.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Services\\ClienteSyncService.cs",
+              "RelativeDocumentMoniker": "Services\\ClienteSyncService.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Services\\ClienteSyncService.cs",
+              "RelativeToolTip": "Services\\ClienteSyncService.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAYwBAAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:41:17.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ClienteSyncBackgroundService.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Background\\ClienteSyncBackgroundService.cs",
+              "RelativeDocumentMoniker": "Background\\ClienteSyncBackgroundService.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Background\\ClienteSyncBackgroundService.cs",
+              "RelativeToolTip": "Background\\ClienteSyncBackgroundService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAABGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:42:12.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\Cliente.cs",
+              "RelativeDocumentMoniker": "Entities\\Cliente.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\Cliente.cs",
+              "RelativeToolTip": "Entities\\Cliente.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T18:10:22.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Pedido.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\Pedido.cs",
+              "RelativeDocumentMoniker": "Entities\\Pedido.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\Pedido.cs",
+              "RelativeToolTip": "Entities\\Pedido.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwBIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T18:12:58.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Produto.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\Produto.cs",
+              "RelativeDocumentMoniker": "Entities\\Produto.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Entities\\Produto.cs",
+              "RelativeToolTip": "Entities\\Produto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T18:11:29.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ClienteDto.cs",
+              "DocumentMoniker": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Models\\ClienteDto.cs",
+              "RelativeDocumentMoniker": "Models\\ClienteDto.cs",
+              "ToolTip": "D:\\Projetos\\Forca-venda\\Forca-venda-api\\Models\\ClienteDto.cs",
+              "RelativeToolTip": "Models\\ClienteDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T13:06:17.629Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
