@@ -1,4 +1,4 @@
-namespace ForcaVendas.Api.Models;
+namespace Forca_venda_api.Domain.Dtos;
 
 public class EmpresaDto
 {

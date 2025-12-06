@@ -17,4 +17,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infra\Integration\Erp\Filial\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

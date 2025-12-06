@@ -1,10 +1,13 @@
-﻿using ForcaVendas.Api.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ForcaVendas.Api.Background;
-using ForcaVendas.Api.Data;
-using ForcaVendas.Api.Integration.Erp;
-using ForcaVendas.Api.Services;
-using Microsoft.EntityFrameworkCore;
+
+using Forca_venda_api.Infra.Data;
+using Forca_venda_api.Infra.Integration.Erp.Clientes;
+using Forca_venda_api.Domain.Services;
+using ForcaVendas.Api.Infra.Config;
+using ForcaVendas.Api.Infra.Integration.Erp.Clientes;
+using ForcaVendas.Api.Infra.Integration.Erp.EmpresasFiliais;
+using ForcaVendas.Api.Domain.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +30,10 @@ var connectionString = builder.Configuration.GetConnectionString("ForcaVendas");
 builder.Services.AddDbContext<ForcaVendasContext>(options =>
     options.UseSqlServer(connectionString));
 
+// bind das configs do ERP
+builder.Services.Configure<ErpSeniorConfig>(
+    builder.Configuration.GetSection("ErpSenior"));
+
 // HttpClient para o serviço SOAP de clientes
 builder.Services.AddHttpClient<IClienteErpService, ClienteErpService>();
 
@@ -34,6 +41,13 @@ builder.Services.AddHttpClient<IClienteErpService, ClienteErpService>();
 //Serviços de integração e sync
 builder.Services.AddScoped<IClienteErpService, ClienteErpService>();
 builder.Services.AddScoped<ClienteSyncService>();
+
+builder.Services.AddHttpClient<EmpresasFiliaisErpService>();
+builder.Services.AddScoped<IEmpresasFiliaisErpService, EmpresasFiliaisErpService>();
+
+builder.Services.AddScoped<EmpresasFiliaisIntegradasSyncService>();
+
+
 
 // BackgroundService de sincronização
 builder.Services.AddHostedService<ClienteSyncBackgroundService>();

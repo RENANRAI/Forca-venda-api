@@ -1,8 +1,8 @@
-﻿namespace ForcaVendas.Api.Integration.Erp;
+﻿namespace Forca_venda_api.Domain.Dtos;
 
-public class ClienteErpDto
+public class ClienteDto
 {
-    public string CodigoErp { get; set; } = default!;
+    public string Id { get; set; } = default!;
     public string Nome { get; set; } = default!;
     public string Documento { get; set; } = default!;
     public string? Cidade { get; set; }

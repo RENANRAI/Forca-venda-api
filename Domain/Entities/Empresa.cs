@@ -1,5 +1,4 @@
-namespace ForcaVendas.Api.Entities;
-
+namespace ForcaVendas.Api.Domain.Entities;
 public class Empresa
 {
     public Guid Id { get; set; }
@@ -11,5 +10,5 @@ public class Empresa
     public DateTime? DataAtualizacao { get; set; }
 
     // Se quiser depois: uma empresa tem vários clientes
-    public ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
+    //public ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
 }

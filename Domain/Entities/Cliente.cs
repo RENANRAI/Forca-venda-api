@@ -1,4 +1,4 @@
-﻿namespace ForcaVendas.Api.Entities;
+﻿namespace ForcaVendas.Api.Domain.Entities;
 
 public class Cliente
 {
@@ -11,7 +11,7 @@ public class Cliente
     public DateTime DataCriacao { get; set; }
     public DateTime? DataAtualizacao { get; set; }
 
-   //ligação com o ERP
+    //ligação com o ERP
     public string? CodigoErp { get; set; }
     public DateTime? DataUltimaSincronizacao { get; set; }
 
