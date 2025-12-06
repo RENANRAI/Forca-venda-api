@@ -1,4 +1,4 @@
-namespace ForcaVendas.Api.Integration.Erp;
+namespace ForcaVendas.Api.Infra.Integration.Erp.Empresa;
 
 public interface IEmpresaErpService
 {

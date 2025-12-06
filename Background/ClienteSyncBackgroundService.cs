@@ -1,4 +1,4 @@
-﻿using ForcaVendas.Api.Services;
+﻿using ForcaVendas.Api.Domain.Services;
 using Microsoft.SqlServer.Server;
 
 namespace ForcaVendas.Api.Background;
@@ -25,7 +25,7 @@ public class ClienteSyncBackgroundService : BackgroundService
             try
             {
                
-                         using var scope = _serviceProvider.CreateScope();
+                using var scope = _serviceProvider.CreateScope();
                 var syncService = scope.ServiceProvider.GetRequiredService<ClienteSyncService>();
 
                 await syncService.SincronizarClientesAsync(stoppingToken);

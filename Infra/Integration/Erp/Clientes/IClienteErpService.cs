@@ -1,6 +1,5 @@
-﻿using ForcaVendas.Api.Integration.Erp;
+﻿namespace ForcaVendas.Api.Infra.Integration.Erp.Clientes;
 
-namespace ForcaVendas.Api.Integration.Erp;
 
 public interface IClienteErpService
 {
@@ -10,3 +9,5 @@ public interface IClienteErpService
     /// </summary>
     Task<IReadOnlyList<ClienteErpDto>> BuscarClientesAsync(DateTime? alteradosDesde);
 }
+
+

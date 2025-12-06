@@ -1,9 +1,10 @@
-﻿using ForcaVendas.Api.Data;
-using ForcaVendas.Api.Entities;
-using ForcaVendas.Api.Integration.Erp;
+﻿using ForcaVendas.Api.Infra.Data;
+using ForcaVendas.Api.Infra.Integration.Erp.Clientes;
+using ForcaVendas.Api.Domain.Entities;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace ForcaVendas.Api.Services;
+namespace ForcaVendas.Api.Domain.Services;
 
 public class ClienteSyncService
 {

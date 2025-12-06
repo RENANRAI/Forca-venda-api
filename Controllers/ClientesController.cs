@@ -1,6 +1,6 @@
-﻿using ForcaVendas.Api.Data;
-using ForcaVendas.Api.Entities;
-using ForcaVendas.Api.Models;
+﻿using Forca_venda_api.Domain.Dtos;
+using ForcaVendas.Api.Infra.Data;
+using ForcaVendas.Api.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

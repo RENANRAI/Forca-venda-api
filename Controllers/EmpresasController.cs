@@ -1,5 +1,5 @@
-using ForcaVendas.Api.Data;
-using ForcaVendas.Api.Models;
+using Forca_venda_api.Domain.Dtos;
+using ForcaVendas.Api.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +29,7 @@ public class EmpresasController : ControllerBase
         var result = empresas.Select(e => new EmpresaDto
         {
             Id = e.Id.ToString(),
-            CodigoErp = e.CodigoErp,
+            CodEmp = e.CodEmp,
             Nome = e.Nome,
             Cnpj = e.Cnpj
         });

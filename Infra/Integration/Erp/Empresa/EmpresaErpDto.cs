@@ -1,8 +1,8 @@
-namespace ForcaVendas.Api.Integration.Erp;
+namespace ForcaVendas.Api.Infra.Integration.Erp.Empresa;
 
 public class EmpresaErpDto
 {
-    public string CodigoErp { get; set; } = default!;
+    public int CodEmp { get; set; } = default!;
     public string Nome { get; set; } = default!;
     public string? Cnpj { get; set; }
 }

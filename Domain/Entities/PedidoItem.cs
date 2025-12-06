@@ -1,4 +1,4 @@
-﻿namespace ForcaVendas.Api.Entities;
+﻿namespace ForcaVendas.Api.Domain.Entities;
 
 public class PedidoItem
 {
