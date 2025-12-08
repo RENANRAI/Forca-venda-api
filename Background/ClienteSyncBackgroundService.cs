@@ -7,7 +7,7 @@ public class ClienteSyncBackgroundService : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<ClienteSyncBackgroundService> _logger;
-    //teste
+
     public ClienteSyncBackgroundService(
         IServiceProvider serviceProvider,
         ILogger<ClienteSyncBackgroundService> logger)
