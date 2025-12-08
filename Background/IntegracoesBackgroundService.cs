@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ForcaVendas.Api.Background
 {
+     //teste 3
     public class IntegracoesBackgroundService : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
