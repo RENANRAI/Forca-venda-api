@@ -2,6 +2,7 @@
 
 public class Cliente
 {
+      // teste
     public Guid Id { get; set; }
     public string Nome { get; set; } = default!;
     public string Documento { get; set; } = default!;
