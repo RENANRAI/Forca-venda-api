@@ -2,6 +2,8 @@
 
 public class Pedido
 {
+
+     //teste
     public Guid Id { get; set; }
     public int Numero { get; set; }
     public Guid ClienteId { get; set; }
