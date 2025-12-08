@@ -1,6 +1,8 @@
 namespace ForcaVendas.Api.Domain.Entities;
 public class Empresa
 {
+
+       // alteração empresa
     public Guid Id { get; set; }
     public int CodEmp { get; set; } = default!; // codEmp
     public string Nome { get; set; } = default!;      // nome fantasia / razão social
