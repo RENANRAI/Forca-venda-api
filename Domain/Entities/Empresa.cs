@@ -5,9 +5,9 @@ public class Empresa
       
     public Guid Id { get; set; }
     public int CodEmp { get; set; } = default!; // codEmp
-    public string Nome { get; set; } = default!;      // nome fantasia / razão social
-    public string? Cnpj { get; set; }
-    public bool Ativo { get; set; } = true;
+    public string NomEmp { get; set; } = default!;      // nome fantasia / razão social
+    public string? NumCgc { get; set; }
+    public bool SitEmp      { get; set; } = true;
     public DateTime DatCri { get; set; }
     public DateTime? DatAtu { get; set; }
 

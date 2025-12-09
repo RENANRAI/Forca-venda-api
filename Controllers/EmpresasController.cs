@@ -22,16 +22,16 @@ public class EmpresasController : ControllerBase
     {
         var empresas = await _db.Empresas
             .AsNoTracking()
-            .Where(e => e.Ativo)
-            .OrderBy(e => e.Nome)
+            .Where(e => e.SitEmp)
+            .OrderBy(e => e.NomEmp)
             .ToListAsync();
 
         var result = empresas.Select(e => new EmpresaDto
         {
             Id = e.Id.ToString(),
             CodEmp = e.CodEmp,
-            Nome = e.Nome,
-            Cnpj = e.Cnpj
+            NomEmp = e.NomEmp,
+            NumCgc = e.NumCgc
         });
 
         return Ok(result);

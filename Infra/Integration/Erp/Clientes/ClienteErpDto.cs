@@ -2,9 +2,9 @@
 
 public class ClienteErpDto
 {
-    public string CodigoErp { get; set; } = default!;
-    public string Nome { get; set; } = default!;
-    public string Documento { get; set; } = default!;
-    public string? Cidade { get; set; }
-    public string? Uf { get; set; }
+    public int CodCli { get; set; } = default!;
+    public string NomCli { get; set; } = default!;
+    public string NumCgc { get; set; } = default!;
+    public string? CidCli { get; set; }
+    public string SigUfs { get; set; }
 }

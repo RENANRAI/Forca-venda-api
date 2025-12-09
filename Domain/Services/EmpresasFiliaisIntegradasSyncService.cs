@@ -85,11 +85,11 @@ public class EmpresasFiliaisIntegradasSyncService
                 {
                     Id = Guid.NewGuid(),
                     CodEmp = dto.CodEmp,
-                    Nome = string.IsNullOrWhiteSpace(dto.NomEmp)
+                    NomEmp = string.IsNullOrWhiteSpace(dto.NomEmp)
                         ? $"EMP {dto.CodEmp}"
                         : dto.NomEmp,
-                    Cnpj = null,
-                    Ativo = true,
+                    NumCgc = null,
+                    SitEmp = true,
                     DatCri = DateTime.UtcNow
                 };
 
@@ -99,15 +99,15 @@ public class EmpresasFiliaisIntegradasSyncService
             else
             {
                 if (!string.IsNullOrWhiteSpace(dto.NomEmp) &&
-                    empresa.Nome != dto.NomEmp)
+                    empresa.NomEmp != dto.NomEmp)
                 {
-                    empresa.Nome = dto.NomEmp;
+                    empresa.NomEmp = dto.NomEmp;
                     empresa.DatAtu = DateTime.UtcNow;
                 }
 
-                if (!empresa.Ativo)
+                if (!empresa.SitEmp)
                 {
-                    empresa.Ativo = true;
+                    empresa.SitEmp = true;
                     empresa.DatAtu = DateTime.UtcNow;
                 }
             }

@@ -10,6 +10,8 @@ public class IntegracaoController : ControllerBase
     private readonly ClienteSyncService _clienteSync;
     private readonly EmpresasFiliaisIntegradasSyncService _empFilSync;
     private readonly FilialSyncService _filsync;
+  
+  
 
     public IntegracaoController(ClienteSyncService clienteSync, EmpresasFiliaisIntegradasSyncService empFilSync, FilialSyncService filsync) 
     {
@@ -17,8 +19,7 @@ public class IntegracaoController : ControllerBase
         _empFilSync = empFilSync;
         _filsync = filsync ;
 
-
-}
+    }
 
 
     [HttpPost("empresas-filiais/sincronizar")]

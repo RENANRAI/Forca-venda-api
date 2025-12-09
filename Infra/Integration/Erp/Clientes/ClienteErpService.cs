@@ -4,6 +4,7 @@ using ForcaVendas.Api.Infra.Integration.Erp.Clientes;
 using ForcaVendas.Api.Infra.Config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ForcaVendas.Api.Infra.Integration.Erp.Clientes;
 
@@ -122,6 +123,7 @@ public class ClienteErpService : IClienteErpService
             foreach (var c in clientesNodes)
             {
                 var codigoErp = c.Element("codCli")?.Value?.Trim() ?? "";
+            
                 var nome = c.Element("nomCli")?.Value?.Trim() ?? "";
                 var documento = c.Element("cgcCpf")?.Value?.Trim() ?? "";
                 var cidade = c.Element("cidCli")?.Value?.Trim();
@@ -135,11 +137,11 @@ public class ClienteErpService : IClienteErpService
 
                 var dto = new ClienteErpDto
                 {
-                    CodigoErp = codigoErp,
-                    Nome = nome,
-                    Documento = documento,
-                    Cidade = cidade,
-                    Uf = uf
+                    CodCli = Convert.ToInt32(codigoErp),
+                    NomCli = nome,
+                    NumCgc = documento,
+                    CidCli = cidade,
+                    SigUfs = uf,
                 };
 
                 lista.Add(dto);

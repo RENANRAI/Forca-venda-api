@@ -23,16 +23,16 @@ public class ClientesController : ControllerBase
     {
         var clientes = await _context.Clientes
             .AsNoTracking()
-            .OrderBy(c => c.Nome)
+            .OrderBy(c => c.NomCli)
             .ToListAsync();
 
         var result = clientes.Select(c => new ClienteDto
         {
             Id = c.Id.ToString(),
-            Nome = c.Nome,
-            Documento = c.Documento,
-            Cidade = c.Cidade,
-            Uf = c.Uf
+            NomCli = c.NomCli,
+            NumCgc = c.NumCgc,
+            CidCli = c.CidCli,
+            SigUfs = c.SigUfs
         });
 
         return Ok(result);
@@ -52,10 +52,10 @@ public class ClientesController : ControllerBase
         var dto = new ClienteDto
         {
             Id = cliente.Id.ToString(),
-            Nome = cliente.Nome,
-            Documento = cliente.Documento,
-            Cidade = cliente.Cidade,
-            Uf = cliente.Uf
+            NomCli = cliente.NomCli,
+            NumCgc = cliente.NumCgc,
+            CidCli = cliente.CidCli,
+            SigUfs = cliente.SigUfs
         };
 
         return Ok(dto);
@@ -65,18 +65,18 @@ public class ClientesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ClienteDto>> CriarCliente([FromBody] ClienteDto dto)
     {
-        if (string.IsNullOrWhiteSpace(dto.Nome) || string.IsNullOrWhiteSpace(dto.Documento))
-            return BadRequest("Nome e Documento são obrigatórios.");
+        if (string.IsNullOrWhiteSpace(dto.NomCli) || string.IsNullOrWhiteSpace(dto.NumCgc))
+            return BadRequest("Nome e CPF/CNPJ são obrigatórios.");
 
         var entidade = new Cliente
         {
             Id = Guid.NewGuid(),
-            Nome = dto.Nome,
-            Documento = dto.Documento,
-            Cidade = dto.Cidade,
-            Uf = dto.Uf,
-            Ativo = true,
-            DataCriacao = DateTime.UtcNow
+            NomCli = dto.NomCli,
+            NumCgc = dto.NumCgc,
+            CidCli = dto.CidCli,
+            SigUfs = dto.SigUfs,
+            SitCli= true,
+            DatCri = DateTime.UtcNow
         };
 
         _context.Clientes.Add(entidade);
@@ -95,14 +95,14 @@ public class ClientesController : ControllerBase
         if (entidade is null)
             return NotFound();
 
-        if (string.IsNullOrWhiteSpace(dto.Nome) || string.IsNullOrWhiteSpace(dto.Documento))
+        if (string.IsNullOrWhiteSpace(dto.NomCli) || string.IsNullOrWhiteSpace(dto.NumCgc))
             return BadRequest("Nome e Documento são obrigatórios.");
 
-        entidade.Nome = dto.Nome;
-        entidade.Documento = dto.Documento;
-        entidade.Cidade = dto.Cidade;
-        entidade.Uf = dto.Uf;
-        entidade.DataAtualizacao = DateTime.UtcNow;
+        entidade.NomCli = dto.NomCli;
+        entidade.NumCgc = dto.NumCgc;
+        entidade.CidCli = dto.CidCli;
+        entidade.SigUfs = dto.SigUfs;
+        entidade.DatAtu = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
 

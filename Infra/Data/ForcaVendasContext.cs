@@ -64,8 +64,8 @@ public class ForcaVendasContext : DbContext
         empresa.HasKey(e => e.Id);
         empresa.Property(e => e.CodEmp).IsRequired();
         empresa.HasIndex(e => e.CodEmp).IsUnique();
-        empresa.Property(e => e.Nome).IsRequired().HasMaxLength(200);
-        empresa.Property(e => e.Cnpj).HasMaxLength(20);
+        empresa.Property(e => e.NomEmp).IsRequired().HasMaxLength(200);
+        empresa.Property(e => e.NumCgc).HasMaxLength(20);
 
 
         // FILIAL
@@ -103,12 +103,12 @@ public class ForcaVendasContext : DbContext
         var cliente = modelBuilder.Entity<Cliente>();
         cliente.ToTable("Clientes");
         cliente.HasKey(c => c.Id);
-        cliente.Property(c => c.Nome).IsRequired().HasMaxLength(200);
-        cliente.Property(c => c.Documento).IsRequired().HasMaxLength(20);
-        cliente.Property(c => c.Cidade).HasMaxLength(100);
-        cliente.Property(c => c.Uf).HasMaxLength(2);
-        cliente.Property(c => c.CodigoErp).HasMaxLength(50);
-        cliente.HasIndex(c => c.CodigoErp);
+        cliente.Property(c => c.NomCli).IsRequired().HasMaxLength(200);
+        cliente.Property(c => c.NumCgc).IsRequired().HasMaxLength(20);
+        cliente.Property(c => c.CidCli).HasMaxLength(100);
+        cliente.Property(c => c.SigUfs).HasMaxLength(2);
+        cliente.Property(c => c.CodCli);
+        cliente.HasIndex(c => c.CodCli);
 
         // PRODUTO
         var produto = modelBuilder.Entity<Produto>();

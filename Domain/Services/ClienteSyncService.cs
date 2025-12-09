@@ -31,34 +31,34 @@ public class ClienteSyncService
                 break;
 
             var existente = await _db.Clientes
-                .FirstOrDefaultAsync(c => c.CodigoErp == cliErp.CodigoErp, cancellationToken);
+                .FirstOrDefaultAsync(c => c.CodCli == cliErp.CodCli, cancellationToken);
 
             if (existente is null)
             {
                 var novo = new Cliente
                 {
                     Id = Guid.NewGuid(),
-                    CodigoErp = cliErp.CodigoErp,
-                    Nome = cliErp.Nome,
-                    Documento = cliErp.Documento,
-                    Cidade = cliErp.Cidade,
-                    Uf = cliErp.Uf,
-                    Ativo = true,
-                    DataCriacao = DateTime.UtcNow,
-                    DataUltimaSincronizacao = DateTime.UtcNow
+                    CodCli = cliErp.CodCli,
+                    NomCli = cliErp.NomCli,
+                    NumCgc = cliErp.NumCgc,
+                    CidCli = cliErp.CidCli,
+                    SigUfs = cliErp.SigUfs,
+                    SitCli = true,
+                    DatCri = DateTime.UtcNow,
+                    DatSyn = DateTime.UtcNow
                 };
 
                 _db.Clientes.Add(novo);
             }
             else
             {
-                existente.Nome = cliErp.Nome;
-                existente.Documento = cliErp.Documento;
-                existente.Cidade = cliErp.Cidade;
-                existente.Uf = cliErp.Uf;
-                existente.Ativo = true;
-                existente.DataAtualizacao = DateTime.UtcNow;
-                existente.DataUltimaSincronizacao = DateTime.UtcNow;
+                existente.NomCli = cliErp.NomCli;
+                existente.NumCgc = cliErp.NumCgc;
+                existente.CidCli = cliErp.CidCli;
+                existente.SigUfs = cliErp.SigUfs;
+                existente.SitCli = true;
+                existente.DatAtu = DateTime.UtcNow;
+                existente.DatSyn = DateTime.UtcNow;
             }
         }
 
