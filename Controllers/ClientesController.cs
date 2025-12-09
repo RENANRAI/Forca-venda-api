@@ -30,7 +30,7 @@ public class ClientesController : ControllerBase
         {
             Id = c.Id.ToString(),
             NomCli = c.NomCli,
-            NumCgc = c.NumCgc,
+            CgcCpf = c.CgcCpf,
             CidCli = c.CidCli,
             SigUfs = c.SigUfs
         });
@@ -53,7 +53,7 @@ public class ClientesController : ControllerBase
         {
             Id = cliente.Id.ToString(),
             NomCli = cliente.NomCli,
-            NumCgc = cliente.NumCgc,
+            CgcCpf = cliente.CgcCpf,
             CidCli = cliente.CidCli,
             SigUfs = cliente.SigUfs
         };
@@ -65,14 +65,14 @@ public class ClientesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ClienteDto>> CriarCliente([FromBody] ClienteDto dto)
     {
-        if (string.IsNullOrWhiteSpace(dto.NomCli) || string.IsNullOrWhiteSpace(dto.NumCgc))
+        if (string.IsNullOrWhiteSpace(dto.NomCli) || string.IsNullOrWhiteSpace(dto.CgcCpf))
             return BadRequest("Nome e CPF/CNPJ são obrigatórios.");
 
         var entidade = new Cliente
         {
             Id = Guid.NewGuid(),
             NomCli = dto.NomCli,
-            NumCgc = dto.NumCgc,
+            CgcCpf = dto.CgcCpf,
             CidCli = dto.CidCli,
             SigUfs = dto.SigUfs,
             SitCli= true,
@@ -95,11 +95,11 @@ public class ClientesController : ControllerBase
         if (entidade is null)
             return NotFound();
 
-        if (string.IsNullOrWhiteSpace(dto.NomCli) || string.IsNullOrWhiteSpace(dto.NumCgc))
+        if (string.IsNullOrWhiteSpace(dto.NomCli) || string.IsNullOrWhiteSpace(dto.CgcCpf))
             return BadRequest("Nome e Documento são obrigatórios.");
 
         entidade.NomCli = dto.NomCli;
-        entidade.NumCgc = dto.NumCgc;
+        entidade.CgcCpf = dto.CgcCpf;
         entidade.CidCli = dto.CidCli;
         entidade.SigUfs = dto.SigUfs;
         entidade.DatAtu = DateTime.UtcNow;

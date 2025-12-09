@@ -22,12 +22,12 @@ public class FiliaisErpService : IFiliaisErpService
         _logger = logger;
 
         _defaults = config.Value.Defaults;
-        _url = config.Value.Filial.WsUrl; // << ADICIONAR NO appsettings.json
+        _url = config.Value.Filial.WsUrl!;
     }
 
-    public async Task<IReadOnlyList<FilialErpDto>> BuscarFiliaisAsync()
+    public async Task<IReadOnlyList<FilialErpDto>> BuscarFiliaisAsync(int codEmp, int codFil)
     {
-        var soap = MontarEnvelopeSoap();
+        var soap = MontarEnvelopeSoap(codEmp, codFil);
 
         var request = new HttpRequestMessage(HttpMethod.Post, _url)
         {
@@ -39,13 +39,14 @@ public class FiliaisErpService : IFiliaisErpService
 
         var xml = await response.Content.ReadAsStringAsync();
 
-        _logger.LogInformation("XML de filiais recebido: {xml}", xml);
+        _logger.LogInformation(
+            "XML de filiais recebido para CodEmp={CodEmp}, CodFil={CodFil}: {Xml}",
+            codEmp, codFil, xml);
 
-       // return Parse(xml);
         return ParseResposta(xml);
     }
 
-    private string MontarEnvelopeSoap()
+    private string MontarEnvelopeSoap(int codEmp, int codFil)
     {
         var sb = new StringBuilder();
 
@@ -58,9 +59,9 @@ public class FiliaisErpService : IFiliaisErpService
         sb.AppendLine($"      <password>{_defaults.Senha}</password>");
         sb.AppendLine(@"      <encryption>0</encryption>");
         sb.AppendLine(@"      <parameters>");
-        sb.AppendLine($"        <CodEmp>{_defaults.CodEmp}</CodEmp>");
-        sb.AppendLine(@"        <CodFilEsp></CodFilEsp>"); // todas
-        sb.AppendLine(@"        <CodFil>1</CodFil>");       // 0 = geral (padrão Senior)
+        sb.AppendLine($"        <CodEmp>{codEmp}</CodEmp>");
+        sb.AppendLine(@"        <CodFilEsp></CodFilEsp>"); // todas ou específico via CodFil
+        sb.AppendLine($"        <CodFil>{codFil}</CodFil>");
         sb.AppendLine($"        <IdentificadorSistema>{_defaults.IdentificadorSistema}</IdentificadorSistema>");
         sb.AppendLine($"        <QuantidadeRegistros>{_defaults.QuantidadeRegistros}</QuantidadeRegistros>");
         sb.AppendLine($"        <TipoIntegracao>{_defaults.TipoIntegracao}</TipoIntegracao>");
@@ -72,7 +73,6 @@ public class FiliaisErpService : IFiliaisErpService
         return sb.ToString();
     }
 
-
     private IReadOnlyList<FilialErpDto> ParseResposta(string xml)
     {
         var lista = new List<FilialErpDto>();
@@ -80,13 +80,8 @@ public class FiliaisErpService : IFiliaisErpService
         try
         {
             var doc = XDocument.Parse(xml);
-
-            // namespace do serviço
             XNamespace ser = "http://services.senior.com.br";
 
-            // <ns2:Exportar_2Response xmlns:ns2="http://services.senior.com.br">
-            //   <result>...</result>
-            // </ns2:Exportar_2Response>
             var resultNode = doc
                 .Descendants(ser + "Exportar_2Response")
                 .Descendants("result")
@@ -98,7 +93,6 @@ public class FiliaisErpService : IFiliaisErpService
                 return lista;
             }
 
-            // Cada <filial> é um registro
             foreach (var f in resultNode.Elements("filial"))
             {
                 var codEmpStr = f.Element("codEmp")?.Value?.Trim();
@@ -110,7 +104,6 @@ public class FiliaisErpService : IFiliaisErpService
                 if (!int.TryParse(codFilStr, out var codFil))
                     continue;
 
-                // numCgc no XML vem tipo "80680093000181.0" -> vamos normalizar
                 var rawCnpj = f.Element("numCgc")?.Value?.Trim();
                 var cnpj = rawCnpj?.Replace(".0", "");
 
@@ -119,7 +112,7 @@ public class FiliaisErpService : IFiliaisErpService
                     CodEmp = codEmp,
                     CodFil = codFil,
                     NomFil = f.Element("nomFil")?.Value?.Trim() ?? string.Empty,
-                    NumCgc = cnpj,
+                    CgcCpf = cnpj,
                     EndFil = f.Element("endFil")?.Value?.Trim(),
                     NenFil = f.Element("nenFil")?.Value?.Trim(),
                     BaiFil = f.Element("baiFil")?.Value?.Trim(),
@@ -145,5 +138,4 @@ public class FiliaisErpService : IFiliaisErpService
 
         return lista;
     }
-
 }

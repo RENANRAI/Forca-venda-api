@@ -42,7 +42,7 @@ builder.Services.AddHttpClient<FiliaisErpService>();
 //Serviços de integração e sync
 builder.Services.AddScoped<IClienteErpService, ClienteErpService>();
 builder.Services.AddScoped<ClienteSyncService>();
-builder.Services.AddScoped<FilialSyncService>();
+builder.Services.AddScoped<FiliaisSyncService>();
 builder.Services.AddScoped<IFiliaisErpService, FiliaisErpService>();
 
 builder.Services.AddScoped<IEmpresasFiliaisErpService, EmpresasFiliaisErpService>();

@@ -34,14 +34,18 @@ namespace ForcaVendas.Api.Background
                     que serão integradas, seria apenas uma tabela de parametrização recebida do erp
                     com as empresas e filiais que estão parametrizadas para usar o força de vendas*/
 
+
+                    _logger.LogInformation("Verificando Empresas/Filiais que serão Integradas.");
                     var empFilSync = scope.ServiceProvider
                         .GetRequiredService<EmpresasFiliaisIntegradasSyncService>();
 
+              
                     await empFilSync.SincronizarAsync(stoppingToken);
                     _logger.LogInformation("Sincronização de Empresas/Filiais Integradas concluída.");
 
+                    _logger.LogInformation("Inciando Sincronia de Filial");
                     // SINCRONIZA CADASTO DE FILIAL
-                    var filialSync = scope.ServiceProvider.GetRequiredService<FilialSyncService>();
+                    var filialSync = scope.ServiceProvider.GetRequiredService<FiliaisSyncService>();
                     await filialSync.SincronizarFiliais(stoppingToken);
 
                     // 2️⃣ Sincroniza clientes

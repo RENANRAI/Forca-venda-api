@@ -7,7 +7,7 @@ public interface IClienteErpService
     /// Busca clientes no ERP.
     /// <paramref name="alteradosDesde"/> pode ser usado para otimizar (só alterados).
     /// </summary>
-    Task<IReadOnlyList<ClienteErpDto>> BuscarClientesAsync(DateTime? alteradosDesde);
+    Task<IReadOnlyList<ClienteErpDto>> BuscarClientesAsync(int codEmp, int codFil);
 }
 
 

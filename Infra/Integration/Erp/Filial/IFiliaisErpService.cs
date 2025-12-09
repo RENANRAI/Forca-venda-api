@@ -2,5 +2,5 @@
 
 public interface IFiliaisErpService
 {
-    Task<IReadOnlyList<FilialErpDto>> BuscarFiliaisAsync();
+    Task<IReadOnlyList<FilialErpDto>> BuscarFiliaisAsync(int codEmp, int codFil);
 }

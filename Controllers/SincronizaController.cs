@@ -9,11 +9,11 @@ public class IntegracaoController : ControllerBase
 {
     private readonly ClienteSyncService _clienteSync;
     private readonly EmpresasFiliaisIntegradasSyncService _empFilSync;
-    private readonly FilialSyncService _filsync;
+    private readonly FiliaisSyncService _filsync;
   
   
 
-    public IntegracaoController(ClienteSyncService clienteSync, EmpresasFiliaisIntegradasSyncService empFilSync, FilialSyncService filsync) 
+    public IntegracaoController(ClienteSyncService clienteSync, EmpresasFiliaisIntegradasSyncService empFilSync, FiliaisSyncService filsync) 
     {
         _clienteSync = clienteSync;
         _empFilSync = empFilSync;

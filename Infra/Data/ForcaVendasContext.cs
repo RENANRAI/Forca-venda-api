@@ -18,6 +18,7 @@ public class ForcaVendasContext : DbContext
     public DbSet<PedidoItem> PedidoItens => Set<PedidoItem>();
     public DbSet<Empresa> Empresas => Set<Empresa>();
     public DbSet<EmpresaFilialIntegrada> EmpresasFiliaisIntegradas => Set<EmpresaFilialIntegrada>();
+    public DbSet<ClienteParametrosFilial> ClienteParametrosFiliais { get; set; } = default!;
 
     public DbSet<Filial> Filiais => Set<Filial>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -104,11 +105,39 @@ public class ForcaVendasContext : DbContext
         cliente.ToTable("Clientes");
         cliente.HasKey(c => c.Id);
         cliente.Property(c => c.NomCli).IsRequired().HasMaxLength(200);
-        cliente.Property(c => c.NumCgc).IsRequired().HasMaxLength(20);
+        cliente.Property(c => c.CgcCpf).IsRequired().HasMaxLength(20);
         cliente.Property(c => c.CidCli).HasMaxLength(100);
         cliente.Property(c => c.SigUfs).HasMaxLength(2);
         cliente.Property(c => c.CodCli);
         cliente.HasIndex(c => c.CodCli);
+
+        //CIENTE PARAMETROS FILIAL
+        var cliPar = modelBuilder.Entity<ClienteParametrosFilial>();
+        cliPar.ToTable("ClienteParametrosFilial");
+        cliPar.HasKey(x => x.Id);
+
+        // Índice único por cliente + empresa + filial
+        cliPar.HasIndex(x => new { x.CodCli, x.CodEmp, x.CodFil })
+              .IsUnique();
+
+        // Exemplos de tipos/precisão – ajuste conforme seu CREATE:
+        cliPar.Property(x => x.VlrLim).HasColumnType("decimal(18,4)");
+        cliPar.Property(x => x.SalDup).HasColumnType("decimal(18,4)");
+        cliPar.Property(x => x.SalOut).HasColumnType("decimal(18,4)");
+        cliPar.Property(x => x.SalCre).HasColumnType("decimal(18,4)");
+        cliPar.Property(x => x.PerDsc).HasColumnType("decimal(18,4)");
+        cliPar.Property(x => x.PerFre).HasColumnType("decimal(18,4)");
+        cliPar.Property(x => x.PerIss).HasColumnType("decimal(18,4)");
+
+        cliPar.Property(x => x.LimApr).HasMaxLength(1);
+        cliPar.Property(x => x.CifFob).HasMaxLength(3);
+        cliPar.Property(x => x.CodTab).HasMaxLength(10);
+        cliPar.Property(x => x.CodCpg).HasMaxLength(10);
+
+        // Campos de controle
+        cliPar.Property(x => x.SitReg).HasDefaultValue(true);
+        cliPar.Property(x => x.DatCri).HasColumnType("datetime2");
+        cliPar.Property(x => x.DatAtu).HasColumnType("datetime2");
 
         // PRODUTO
         var produto = modelBuilder.Entity<Produto>();
