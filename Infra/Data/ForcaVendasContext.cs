@@ -69,28 +69,35 @@ public class ForcaVendasContext : DbContext
 
 
         // FILIAL
+        // FILIAL
         var filial = modelBuilder.Entity<Filial>();
         filial.ToTable("Filiais");
+        filial.HasKey(f => f.Id);
 
-
-        filial.HasKey(x => x.Id);
-        filial.HasIndex(x => new { x.CodEmp, x.CodFil }).IsUnique();
-        filial.Property(x => x.Nome).HasMaxLength(200).IsRequired();
-        filial.Property(x => x.Uf).HasMaxLength(2);
-
-        /*
         filial.Property(f => f.CodEmp).IsRequired();
         filial.Property(f => f.CodFil).IsRequired();
-        filial.Property(f => f.Nome).IsRequired().HasMaxLength(200);
-        filial.Property(f => f.Cnpj).HasMaxLength(20);
-        filial.Property(f => f.Cidade).HasMaxLength(100);
-        filial.Property(f => f.Uf).HasMaxLength(2);
 
-        filial 
+        filial.Property(f => f.NomFil).IsRequired().HasMaxLength(200);
+        filial.Property(f => f.NumCgc).HasMaxLength(20);
+        filial.Property(f => f.EndFil).HasMaxLength(200);
+        filial.Property(f => f.NenFil).HasMaxLength(20);
+        filial.Property(f => f.BaiFil).HasMaxLength(100);
+        filial.Property(f => f.CidFil).HasMaxLength(100);
+        filial.Property(f => f.SigUfs).HasMaxLength(2);
+        filial.Property(f => f.CepFil).HasMaxLength(20);
+
+        // garante unicidade por empresa + filial
+        filial
+            .HasIndex(f => new { f.CodEmp, f.CodFil })
+            .IsUnique();
+
+        // relação opcional com Empresa via CodEmp (não por Id)
+        filial
             .HasOne(f => f.Empresa)
-            .WithMany()              // se você não tiver coleção na Empresa
-            .HasForeignKey(f => f.EmpresaId)
-            .OnDelete(DeleteBehavior.Restrict);*/
+            .WithMany()
+            .HasPrincipalKey(e => e.CodEmp)  // Empresa.CodEmp é único
+            .HasForeignKey(f => f.CodEmp);   // Filial.CodEmp
+
 
         // CLIENTE
         var cliente = modelBuilder.Entity<Cliente>();

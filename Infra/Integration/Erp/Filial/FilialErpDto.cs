@@ -4,12 +4,13 @@ public class FilialErpDto
 {
     public int CodEmp { get; set; }
     public int CodFil { get; set; }
-    public string Nome { get; set; } = default!;
-    public string? Cnpj { get; set; }
-    public string? Endereco { get; set; }
-    public string? Numero { get; set; }
-    public string? Bairro { get; set; }
-    public string? Cidade { get; set; }
-    public string? Uf { get; set; }
-    public string? Cep { get; set; }
+
+    public string NomFil { get; set; } = default!;   // nomFil
+    public string? NumCgc { get; set; }             // numCgc
+    public string? EndFil { get; set; }         // endFil
+    public string? NenFil { get; set; }           // nenFil
+    public string? BaiFil { get; set; }           // baiFil
+    public string? CidFil { get; set; }           // cidFil
+    public string? SigUfs { get; set; }               // sigUfs
+    public string? CepFil { get; set; }              // cepFil
 }

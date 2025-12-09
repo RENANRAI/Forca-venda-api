@@ -31,7 +31,7 @@ public class IntegracaoController : ControllerBase
     [HttpPost("filiais/sincronizar")]
     public async Task<IActionResult> Sincronizar()
     {
-        await _filsync.SincronizarAsync();
+        await _filsync.SincronizarFiliais();
         return Ok("Sincronização de filiais concluída.");
     }
 

@@ -27,7 +27,7 @@ public class FiliaisErpService : IFiliaisErpService
 
     public async Task<IReadOnlyList<FilialErpDto>> BuscarFiliaisAsync()
     {
-        var soap = MontarEnvelope();
+        var soap = MontarEnvelopeSoap();
 
         var request = new HttpRequestMessage(HttpMethod.Post, _url)
         {
@@ -41,60 +41,109 @@ public class FiliaisErpService : IFiliaisErpService
 
         _logger.LogInformation("XML de filiais recebido: {xml}", xml);
 
-        return Parse(xml);
+       // return Parse(xml);
+        return ParseResposta(xml);
     }
 
-    private string MontarEnvelope()
+    private string MontarEnvelopeSoap()
     {
-        return
-$@"<?xml version=""1.0"" encoding=""UTF-8""?>
-<soapenv:Envelope xmlns:soapenv=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:ser=""http://services.senior.com.br"">
-  <soapenv:Header/>
-  <soapenv:Body>
-    <ser:ExportarFiliais>
-       <user>{_defaults.Usuario}</user>
-       <password>{_defaults.Senha}</password>
-       <encryption>0</encryption>
-       <parameters>
-         <flowInstanceID></flowInstanceID>
-         <flowName></flowName>
-       </parameters>
-    </ser:ExportarFiliais>
-  </soapenv:Body>
-</soapenv:Envelope>";
+        var sb = new StringBuilder();
+
+        sb.AppendLine(@"<?xml version=""1.0"" encoding=""UTF-8""?>");
+        sb.AppendLine(@"<soapenv:Envelope xmlns:soapenv=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:ser=""http://services.senior.com.br"">");
+        sb.AppendLine(@"  <soapenv:Header/>");
+        sb.AppendLine(@"  <soapenv:Body>");
+        sb.AppendLine(@"    <ser:Exportar_2>");
+        sb.AppendLine($"      <user>{_defaults.Usuario}</user>");
+        sb.AppendLine($"      <password>{_defaults.Senha}</password>");
+        sb.AppendLine(@"      <encryption>0</encryption>");
+        sb.AppendLine(@"      <parameters>");
+        sb.AppendLine($"        <CodEmp>{_defaults.CodEmp}</CodEmp>");
+        sb.AppendLine(@"        <CodFilEsp></CodFilEsp>"); // todas
+        sb.AppendLine(@"        <CodFil>1</CodFil>");       // 0 = geral (padrão Senior)
+        sb.AppendLine($"        <IdentificadorSistema>{_defaults.IdentificadorSistema}</IdentificadorSistema>");
+        sb.AppendLine($"        <QuantidadeRegistros>{_defaults.QuantidadeRegistros}</QuantidadeRegistros>");
+        sb.AppendLine($"        <TipoIntegracao>{_defaults.TipoIntegracao}</TipoIntegracao>");
+        sb.AppendLine(@"      </parameters>");
+        sb.AppendLine(@"    </ser:Exportar_2>");
+        sb.AppendLine(@"  </soapenv:Body>");
+        sb.AppendLine(@"</soapenv:Envelope>");
+
+        return sb.ToString();
     }
 
-    private IReadOnlyList<FilialErpDto> Parse(string xml)
+
+    private IReadOnlyList<FilialErpDto> ParseResposta(string xml)
     {
         var lista = new List<FilialErpDto>();
 
-        var doc = XDocument.Parse(xml);
-        XNamespace ser = "http://services.senior.com.br";
-
-        var root = doc.Descendants(ser + "ExportarFiliaisResponse")
-                      .Descendants("result")
-                      .FirstOrDefault();
-
-        if (root == null)
-            return lista;
-
-        foreach (var f in root.Elements("filial"))
+        try
         {
-            lista.Add(new FilialErpDto
+            var doc = XDocument.Parse(xml);
+
+            // namespace do serviço
+            XNamespace ser = "http://services.senior.com.br";
+
+            // <ns2:Exportar_2Response xmlns:ns2="http://services.senior.com.br">
+            //   <result>...</result>
+            // </ns2:Exportar_2Response>
+            var resultNode = doc
+                .Descendants(ser + "Exportar_2Response")
+                .Descendants("result")
+                .FirstOrDefault();
+
+            if (resultNode is null)
             {
-                CodEmp = int.Parse(f.Element("codEmp")!.Value),
-                CodFil = int.Parse(f.Element("codFil")!.Value),
-                Nome = f.Element("nomFil")?.Value ?? "",
-                Cnpj = f.Element("cgcFil")?.Value,
-                Endereco = f.Element("endFil")?.Value,
-                Numero = f.Element("numEnd")?.Value,
-                Bairro = f.Element("baiFil")?.Value,
-                Cidade = f.Element("cidFil")?.Value,
-                Uf = f.Element("sigUfs")?.Value,
-                Cep = f.Element("cepFil")?.Value
-            });
+                _logger.LogWarning("Nó <result> não encontrado na resposta do Exportar_2 (filiais).");
+                return lista;
+            }
+
+            // Cada <filial> é um registro
+            foreach (var f in resultNode.Elements("filial"))
+            {
+                var codEmpStr = f.Element("codEmp")?.Value?.Trim();
+                var codFilStr = f.Element("codFil")?.Value?.Trim();
+
+                if (!int.TryParse(codEmpStr, out var codEmp))
+                    continue;
+
+                if (!int.TryParse(codFilStr, out var codFil))
+                    continue;
+
+                // numCgc no XML vem tipo "80680093000181.0" -> vamos normalizar
+                var rawCnpj = f.Element("numCgc")?.Value?.Trim();
+                var cnpj = rawCnpj?.Replace(".0", "");
+
+                var dto = new FilialErpDto
+                {
+                    CodEmp = codEmp,
+                    CodFil = codFil,
+                    NomFil = f.Element("nomFil")?.Value?.Trim() ?? string.Empty,
+                    NumCgc = cnpj,
+                    EndFil = f.Element("endFil")?.Value?.Trim(),
+                    NenFil = f.Element("nenFil")?.Value?.Trim(),
+                    BaiFil = f.Element("baiFil")?.Value?.Trim(),
+                    CidFil = f.Element("cidFil")?.Value?.Trim(),
+                    SigUfs = f.Element("sigUfs")?.Value?.Trim(),
+                    CepFil = f.Element("cepFil")?.Value?.Trim()
+                };
+
+                lista.Add(dto);
+            }
+
+            if (lista.Count == 0)
+            {
+                var msg = resultNode.Element("mensagemRetorno")?.Value;
+                var tipoRetorno = resultNode.Element("tipoRetorno")?.Value;
+                _logger.LogWarning("Nenhuma filial retornada. tipoRetorno={Tipo}, mensagemRetorno={Msg}", tipoRetorno, msg);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao interpretar XML de filiais (Exportar_2).");
         }
 
         return lista;
     }
+
 }

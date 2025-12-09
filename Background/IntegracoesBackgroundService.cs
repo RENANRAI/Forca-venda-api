@@ -28,12 +28,21 @@ namespace ForcaVendas.Api.Background
                 {
                     using var scope = _serviceProvider.CreateScope();
 
-                    // 1️⃣ Sincroniza empresas/filiais integradas
+                    /* 1️⃣ Sincroniza empresas/filiais integradas
+                     Só sincriza os codigos de empresa e filial que estão parametrizas do ERP
+                    apartir dessa integração que a rotina integra os cadastrs de empresa e filials 
+                    que serão integradas, seria apenas uma tabela de parametrização recebida do erp
+                    com as empresas e filiais que estão parametrizadas para usar o força de vendas*/
+
                     var empFilSync = scope.ServiceProvider
                         .GetRequiredService<EmpresasFiliaisIntegradasSyncService>();
 
                     await empFilSync.SincronizarAsync(stoppingToken);
                     _logger.LogInformation("Sincronização de Empresas/Filiais Integradas concluída.");
+
+                    // SINCRONIZA CADASTO DE FILIAL
+                    var filialSync = scope.ServiceProvider.GetRequiredService<FilialSyncService>();
+                    await filialSync.SincronizarFiliais(stoppingToken);
 
                     // 2️⃣ Sincroniza clientes
                     var cliSync = scope.ServiceProvider
@@ -41,6 +50,8 @@ namespace ForcaVendas.Api.Background
 
                     await cliSync.SincronizarClientesAsync(stoppingToken);
                     _logger.LogInformation("Sincronização de Clientes concluída.");
+
+                   
                 }
                 catch (Exception ex)
                 {
