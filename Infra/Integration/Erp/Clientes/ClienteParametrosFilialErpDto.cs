@@ -3,7 +3,7 @@
 public class ClienteParametrosFilialErpDto
 {
     public int CodCli { get; set; }
-    public int CodEmp { get; set; }
+     public int CodEmp { get; set; }
     public int CodFil { get; set; }
 
     public double? SalDup { get; set; }
@@ -28,5 +28,5 @@ public class ClienteParametrosFilialErpDto
     public string? CodTab { get; set; }
 
     // Se você quiser, pode trazer também o JSON dos campos usuário:
-    public Dictionary<string, string>? CamposUsuario { get; set; }
+    //public Dictionary<string, string>? CamposUsuario { get; set; }
 }

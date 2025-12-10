@@ -5,6 +5,8 @@ using ForcaVendas.Api.Infra.Config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using static System.Net.Mime.MediaTypeNames;
+using ForcaVendas.Api.Domain.Entities;
+using System.Globalization;
 
 namespace ForcaVendas.Api.Infra.Integration.Erp.Clientes;
 
@@ -49,7 +51,7 @@ public class ClienteErpService : IClienteErpService
 
             _logger.LogInformation("Resposta WS Clientes para Emp={CodEmp} Fil={CodFil}: {Xml}", codEmp, codFil, xml);
 
-            return ParseResposta(xml);
+            return ParseResposta(xml,codEmp,codFil);
         }
         catch (Exception ex)
         {
@@ -92,7 +94,7 @@ public class ClienteErpService : IClienteErpService
     }
 
 
-    private IReadOnlyList<ClienteErpDto> ParseResposta(string xml)
+    private IReadOnlyList<ClienteErpDto> ParseResposta(string xml, int codEmp, int codFil)
     {
         var lista = new List<ClienteErpDto>();
 
@@ -112,13 +114,48 @@ public class ClienteErpService : IClienteErpService
                 return lista;
             }
 
-            // 1) Clientes
+            // Nó(s) <cliente> dentro de <result>
             var clientesNodes = resultNode.Elements("cliente");
 
-            var dictPorCodCli = new Dictionary<int, ClienteErpDto>();
+            // Helpers de conversão
+            double? ToDouble(string? s)
+            {
+                if (string.IsNullOrWhiteSpace(s))
+                    return null;
+
+                // XML vem com "0.0"
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var v))
+                    return v;
+
+                if (double.TryParse(s, out v))
+                    return v;
+
+                return null;
+            }
+
+            DateTime? ToDate(string? s)
+            {
+                if (string.IsNullOrWhiteSpace(s))
+                    return null;
+
+                // Padrão Senior: dd/MM/yyyy
+                if (DateTime.TryParseExact(
+                        s,
+                        "dd/MM/yyyy",
+                        CultureInfo.GetCultureInfo("pt-BR"),
+                        DateTimeStyles.None,
+                        out var d))
+                    return d;
+
+                if (DateTime.TryParse(s, out d))
+                    return d;
+
+                return null;
+            }
 
             foreach (var c in clientesNodes)
             {
+                // codCli vem do cliente
                 var codCliStr = c.Element("codCli")?.Value?.Trim();
                 if (!int.TryParse(codCliStr, out var codCli))
                     continue;
@@ -138,65 +175,43 @@ public class ClienteErpService : IClienteErpService
                 };
 
                 lista.Add(dto);
-                dictPorCodCli[codCli] = dto;
-            }
 
-            // 2) Histórico (parâmetros por filial)
-            var historicosNodes = resultNode.Elements("historico");
+                // <historico> é filho de <cliente>
+                var historicosNodes = c.Elements("historico");
 
-            foreach (var h in historicosNodes)
-            {
-                var codCliStr = h.Element("codCli")?.Value?.Trim();
-                var codEmpStr = h.Element("codEmp")?.Value?.Trim();
-                var codFilStr = h.Element("codFil")?.Value?.Trim();
-
-                if (!int.TryParse(codCliStr, out var codCli)) continue;
-                 if (!int.TryParse(codEmpStr, out var codEmp)) continue;
-                 if (!int.TryParse(codFilStr, out var codFil)) continue;
-
-             if (!dictPorCodCli.TryGetValue(codCli, out var cliDto))
-                 {
-                     // histórico sem cliente correspondente (não deveria), ignora
-                     continue;
-                 }
-
-                 double? ToDouble(string? s)
-                     => double.TryParse(s, out var v) ? v : null;
-
-                 DateTime? ToDate(string? s)
-                     => DateTime.TryParse(s, out var d) ? d : null;
-
-
-               
-                var param = new ClienteParametrosFilialErpDto
+                foreach (var h in historicosNodes)
                 {
-                    CodCli = codCli,
-                    CodEmp = codEmp,
-                    CodFil = codFil,
+                    var param = new ClienteParametrosFilialErpDto
+                    {
+                        // 👉 sempre vindo do contexto da chamada
+                        CodCli = codCli,
+                        CodEmp = codEmp,
+                        CodFil = codFil,
 
-                    SalDup = ToDouble(h.Element("salDup")?.Value),
-                    SalOut = ToDouble(h.Element("salOut")?.Value),
-                    SalCre = ToDouble(h.Element("salCre")?.Value),
-                    DatLim = ToDate(h.Element("datLim")?.Value),
-                    VlrLim = ToDouble(h.Element("vlrLim")?.Value),
-                    LimApr = h.Element("limApr")?.Value?.Trim(),
-                    VlrPfa = ToDouble(h.Element("vlrPfa")?.Value),
-                    DatMac = ToDate(h.Element("datMac")?.Value),
-                    VlrMac = ToDouble(h.Element("vlrMac")?.Value),
+                        SalDup = ToDouble(h.Element("salDup")?.Value),
+                        SalOut = ToDouble(h.Element("salOut")?.Value),
+                        SalCre = ToDouble(h.Element("salCre")?.Value),
+                        DatLim = ToDate(h.Element("datLim")?.Value),
+                        VlrLim = ToDouble(h.Element("vlrLim")?.Value),
+                        LimApr = h.Element("limApr")?.Value?.Trim(),
+                        VlrPfa = ToDouble(h.Element("vlrPfa")?.Value),
+                        DatMac = ToDate(h.Element("datMac")?.Value),
+                        VlrMac = ToDouble(h.Element("vlrMac")?.Value),
 
-                    CatCli = int.TryParse(h.Element("catCli")?.Value, out var catCli) ? catCli : null,
-                    CodCpg = h.Element("codCpg")?.Value?.Trim(),
-                    CodFpg = int.TryParse(h.Element("codFpg")?.Value, out var codFpg) ? codFpg : null,
-                    CodTpr = h.Element("codTpr")?.Value?.Trim(),
-                    PerDsc = ToDouble(h.Element("perDsc")?.Value),
+                        CatCli = int.TryParse(h.Element("catCli")?.Value, out var catCli) ? catCli : null,
+                        CodCpg = h.Element("codCpg")?.Value?.Trim(),
+                        CodFpg = int.TryParse(h.Element("codFpg")?.Value, out var codFpg) ? codFpg : null,
+                        CodTpr = h.Element("codTpr")?.Value?.Trim(),
+                        PerDsc = ToDouble(h.Element("perDsc")?.Value),
 
-                    PerFre = ToDouble(h.Element("perFre")?.Value),
-                    PerIss = ToDouble(h.Element("perIss")?.Value),
-                    CifFob = h.Element("cifFob")?.Value?.Trim(),
-                    CodTab = h.Element("codTab")?.Value?.Trim()
-                };
+                        PerFre = ToDouble(h.Element("perFre")?.Value),
+                        PerIss = ToDouble(h.Element("perIss")?.Value),
+                        CifFob = h.Element("cifFob")?.Value?.Trim(),
+                        CodTab = h.Element("codTab")?.Value?.Trim()
+                    };
 
-                cliDto.ParametrosPorFilial.Add(param);
+                    dto.ParametrosPorFilial.Add(param);
+                }
             }
         }
         catch (Exception ex)
@@ -206,5 +221,6 @@ public class ClienteErpService : IClienteErpService
 
         return lista;
     }
+
 
 }

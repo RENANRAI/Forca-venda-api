@@ -32,7 +32,7 @@ public class ClienteParametrosFilial
     public string? CodTab { get; set; }
 
     // Se quiser guardar o JSON dos campos usuário:
-    public string? CamposUsuarioJson { get; set; }
+   // public string? CamposUsuarioJson { get; set; }
 
     // Controle interno
     public bool SitReg { get; set; } = true;
