@@ -1,41 +1,40 @@
-﻿// Domain/Entities/ClienteParametrosFilial.cs
-namespace ForcaVendas.Api.Domain.Entities;
+﻿namespace ForcaVendas.Api.Domain.Entities;
 
 public class ClienteParametrosFilial
 {
     public Guid Id { get; set; }
 
-    public int CodCli { get; set; }
-    public int CodEmp { get; set; }
-    public int CodFil { get; set; }
+    public int CodCli { get; set; }      // codcli int
+    public short CodEmp { get; set; }    // codemp smallint
+    public int CodFil { get; set; }      // codfil int
 
-    // Alguns campos principais (você pode ir completando depois com todos)
-    public double? SalDup { get; set; }
-    public double? SalOut { get; set; }
-    public double? SalCre { get; set; }
-    public DateTime? DatLim { get; set; }
-    public double? VlrLim { get; set; }
-    public string? LimApr { get; set; }
-    public double? VlrPfa { get; set; }
-    public DateTime? DatMac { get; set; }
-    public double? VlrMac { get; set; }
+    // Campos principais (numeric -> decimal)
+    public decimal? SalDup { get; set; } // saldup numeric(15,2)
+    public decimal? SalOut { get; set; } // salout numeric(15,2)
+    public decimal? SalCre { get; set; } // salcre numeric(15,2)
+    public DateTime? DatLim { get; set; } // datlim datetime
+    public decimal? VlrLim { get; set; } // vlrlim numeric(15,2)
+    public string? LimApr { get; set; }  // limapr varchar(1)
+    public decimal? VlrPfa { get; set; } // vlrpfa numeric(15,2)
+    public DateTime? DatMac { get; set; } // datmac datetime
+    public decimal? VlrMac { get; set; } // vlrmac numeric(15,2)
 
-    public int? CatCli { get; set; }
-    public string? CodCpg { get; set; }
-    public int? CodFpg { get; set; }
-    public string? CodTpr { get; set; }
-    public double? PerDsc { get; set; }
+    public short? CatCli { get; set; }   // catcli smallint
+    public string? CodCpg { get; set; }  // codcpg varchar(6)
+    public short? CodFpg { get; set; }   // codfpg smallint
+    public string? CodTpr { get; set; }  // codtpr varchar(4)
 
-    public double? PerFre { get; set; }
-    public double? PerIss { get; set; }
-    public string? CifFob { get; set; }
-    public string? CodTab { get; set; }
-
-    // Se quiser guardar o JSON dos campos usuário:
-   // public string? CamposUsuarioJson { get; set; }
+    public decimal? PerDsc { get; set; } // perdsc numeric(4,2)
+    public decimal? PerFre { get; set; } // perfre numeric(5,2)
+    public decimal? PerIss { get; set; } // periss numeric(6,4)
+    public string? CifFob { get; set; }  // ciffob varchar(1)
+    public string? CodTab { get; set; }  // codtab varchar(4)
 
     // Controle interno
     public bool SitReg { get; set; } = true;
     public DateTime DatCri { get; set; }
     public DateTime? DatAtu { get; set; }
+
+    // Se quiser guardar o JSON dos campos usuário:
+    // public string? CamposUsuarioJson { get; set; }
 }

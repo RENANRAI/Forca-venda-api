@@ -114,20 +114,19 @@ public class ClienteErpService : IClienteErpService
                 return lista;
             }
 
-            // Nó(s) <cliente> dentro de <result>
             var clientesNodes = resultNode.Elements("cliente");
 
             // Helpers de conversão
-            double? ToDouble(string? s)
+            decimal? ToDecimal(string? s)
             {
                 if (string.IsNullOrWhiteSpace(s))
                     return null;
 
                 // XML vem com "0.0"
-                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var v))
+                if (decimal.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var v))
                     return v;
 
-                if (double.TryParse(s, out v))
+                if (decimal.TryParse(s, out v))
                     return v;
 
                 return null;
@@ -138,7 +137,6 @@ public class ClienteErpService : IClienteErpService
                 if (string.IsNullOrWhiteSpace(s))
                     return null;
 
-                // Padrão Senior: dd/MM/yyyy
                 if (DateTime.TryParseExact(
                         s,
                         "dd/MM/yyyy",
@@ -153,9 +151,16 @@ public class ClienteErpService : IClienteErpService
                 return null;
             }
 
+            short? ToShort(string? s)
+            {
+                if (string.IsNullOrWhiteSpace(s))
+                    return null;
+
+                return short.TryParse(s, out var v) ? v : null;
+            }
+
             foreach (var c in clientesNodes)
             {
-                // codCli vem do cliente
                 var codCliStr = c.Element("codCli")?.Value?.Trim();
                 if (!int.TryParse(codCliStr, out var codCli))
                     continue;
@@ -176,36 +181,34 @@ public class ClienteErpService : IClienteErpService
 
                 lista.Add(dto);
 
-                // <historico> é filho de <cliente>
                 var historicosNodes = c.Elements("historico");
 
                 foreach (var h in historicosNodes)
                 {
                     var param = new ClienteParametrosFilialErpDto
                     {
-                        // 👉 sempre vindo do contexto da chamada
                         CodCli = codCli,
-                        CodEmp = codEmp,
+                        CodEmp = (short)codEmp,
                         CodFil = codFil,
 
-                        SalDup = ToDouble(h.Element("salDup")?.Value),
-                        SalOut = ToDouble(h.Element("salOut")?.Value),
-                        SalCre = ToDouble(h.Element("salCre")?.Value),
+                        SalDup = ToDecimal(h.Element("salDup")?.Value),
+                        SalOut = ToDecimal(h.Element("salOut")?.Value),
+                        SalCre = ToDecimal(h.Element("salCre")?.Value),
                         DatLim = ToDate(h.Element("datLim")?.Value),
-                        VlrLim = ToDouble(h.Element("vlrLim")?.Value),
+                        VlrLim = ToDecimal(h.Element("vlrLim")?.Value),
                         LimApr = h.Element("limApr")?.Value?.Trim(),
-                        VlrPfa = ToDouble(h.Element("vlrPfa")?.Value),
+                        VlrPfa = ToDecimal(h.Element("vlrPfa")?.Value),
                         DatMac = ToDate(h.Element("datMac")?.Value),
-                        VlrMac = ToDouble(h.Element("vlrMac")?.Value),
+                        VlrMac = ToDecimal(h.Element("vlrMac")?.Value),
 
-                        CatCli = int.TryParse(h.Element("catCli")?.Value, out var catCli) ? catCli : null,
+                        CatCli = ToShort(h.Element("catCli")?.Value),
                         CodCpg = h.Element("codCpg")?.Value?.Trim(),
-                        CodFpg = int.TryParse(h.Element("codFpg")?.Value, out var codFpg) ? codFpg : null,
+                        CodFpg = ToShort(h.Element("codFpg")?.Value),
                         CodTpr = h.Element("codTpr")?.Value?.Trim(),
-                        PerDsc = ToDouble(h.Element("perDsc")?.Value),
+                        PerDsc = ToDecimal(h.Element("perDsc")?.Value),
 
-                        PerFre = ToDouble(h.Element("perFre")?.Value),
-                        PerIss = ToDouble(h.Element("perIss")?.Value),
+                        PerFre = ToDecimal(h.Element("perFre")?.Value),
+                        PerIss = ToDecimal(h.Element("perIss")?.Value),
                         CifFob = h.Element("cifFob")?.Value?.Trim(),
                         CodTab = h.Element("codTab")?.Value?.Trim()
                     };
@@ -222,5 +225,7 @@ public class ClienteErpService : IClienteErpService
         return lista;
     }
 
-
 }
+
+
+
