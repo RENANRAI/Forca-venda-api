@@ -10,6 +10,6 @@ public class Produto
     public bool Ativo { get; set; } = true;
     public DateTime DataCriacao { get; set; }
     public DateTime? DataAtualizacao { get; set; }
-   //tyeste
+    //tyeste
     public ICollection<PedidoItem> Itens { get; set; } = new List<PedidoItem>();
 }

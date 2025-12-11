@@ -2,7 +2,7 @@
 
 public class Filial
 {
-      // ajste fillial 
+    // ajste fillial 
     public Guid Id { get; set; }
     public int CodEmp { get; set; }     // Empresa
     public int CodFil { get; set; }     // Filial

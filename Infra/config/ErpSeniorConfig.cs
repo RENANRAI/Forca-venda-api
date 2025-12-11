@@ -19,13 +19,15 @@
 
     public class ErpSeniorConfig
     {
+
         public ErpSeniorDefaults Defaults { get; set; } = new();
         public ErpSeniorServiceConfig Clientes { get; set; } = new();
         public ErpSeniorServiceConfig Empresas { get; set; } = new();
         public ErpSeniorServiceConfig Filial { get; set; } = new();
 
+        public ErpSeniorServiceConfig Representantes { get; set; } = new();
         public ErpSeniorServiceConfig Integracao { get; set; } = new();
 
-        
+
     }
 }

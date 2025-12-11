@@ -2,7 +2,7 @@
 
 public class Cliente
 {
-      
+
     public Guid Id { get; set; }
     //ligação com o ERP
     public int CodCli { get; set; }
@@ -15,7 +15,7 @@ public class Cliente
     public DateTime DatCri { get; set; }
     public DateTime? DatAtu { get; set; }
 
-   
+
     public DateTime? DatSyn { get; set; }
 
     public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();

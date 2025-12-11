@@ -7,11 +7,13 @@ using ForcaVendas.Api.Infra.Config;
 using ForcaVendas.Api.Infra.Integration.Erp.EmpresasFiliais;
 using ForcaVendas.Api.Domain.Services;
 using ForcaVendas.Api.Infra.Integration.Erp.Filiais;
+using ForcaVendas.Api.Infra.Integration.Erp.Representantes;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 const string CorsPolicyName = "AllowFrontend";
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(CorsPolicyName, policy =>
@@ -36,14 +38,17 @@ builder.Services.Configure<ErpSeniorConfig>(
 // HttpClient para o serviço SOAP de clientes
 builder.Services.AddHttpClient<IClienteErpService, ClienteErpService>();
 builder.Services.AddHttpClient<IFiliaisErpService, FiliaisErpService>();
+builder.Services.AddHttpClient<IRepresentanteErpService, RepresentanteErpService>();
 builder.Services.AddHttpClient<EmpresasFiliaisErpService>();
 builder.Services.AddHttpClient<FiliaisErpService>();
+
 
 //Serviços de integração e sync
 builder.Services.AddScoped<IClienteErpService, ClienteErpService>();
 builder.Services.AddScoped<ClienteSyncService>();
 builder.Services.AddScoped<FiliaisSyncService>();
 builder.Services.AddScoped<IFiliaisErpService, FiliaisErpService>();
+builder.Services.AddScoped<RepresentanteSyncService>();
 
 builder.Services.AddScoped<IEmpresasFiliaisErpService, EmpresasFiliaisErpService>();
 builder.Services.AddScoped<EmpresasFiliaisIntegradasSyncService>();
@@ -51,6 +56,7 @@ builder.Services.AddScoped<EmpresasFiliaisIntegradasSyncService>();
 
 // BackgroundService de sincronização
 builder.Services.AddHostedService<IntegracoesBackgroundService>();
+
 
 
 //builder.Services.AddHostedService<ClienteSyncBackgroundService>();

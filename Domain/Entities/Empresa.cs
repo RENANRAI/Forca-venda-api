@@ -2,12 +2,12 @@ namespace ForcaVendas.Api.Domain.Entities;
 public class Empresa
 {
 
-      
+
     public Guid Id { get; set; }
     public int CodEmp { get; set; } = default!; // codEmp
     public string NomEmp { get; set; } = default!;      // nome fantasia / razão social
     public string? NumCgc { get; set; }
-    public bool SitEmp      { get; set; } = true;
+    public bool SitEmp { get; set; } = true;
     public DateTime DatCri { get; set; }
     public DateTime? DatAtu { get; set; }
 

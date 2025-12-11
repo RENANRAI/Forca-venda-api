@@ -24,7 +24,7 @@ public class ClienteSyncBackgroundService : BackgroundService
         {
             try
             {
-               
+
                 using var scope = _serviceProvider.CreateScope();
                 var syncService = scope.ServiceProvider.GetRequiredService<ClienteSyncService>();
 

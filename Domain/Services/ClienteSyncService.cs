@@ -104,30 +104,34 @@ public class ClienteSyncService
 
                         _db.ClienteParametrosFiliais.Add(param);
                     }
+                    else
+                    {
 
-                    // Atualiza campos principais
-                    param.SalDup = paramErp.SalDup;
-                    param.SalOut = paramErp.SalOut;
-                    param.SalCre = paramErp.SalCre;
-                    param.DatLim = paramErp.DatLim;
-                    param.VlrLim = paramErp.VlrLim;
-                    param.LimApr = paramErp.LimApr;
-                    param.VlrPfa = paramErp.VlrPfa;
-                    param.DatMac = paramErp.DatMac;
-                    param.VlrMac = paramErp.VlrMac;
+                        // Atualiza campos principais
+                        param.SalDup = paramErp.SalDup;
+                        param.SalOut = paramErp.SalOut;
+                        param.SalCre = paramErp.SalCre;
+                        param.DatLim = paramErp.DatLim;
+                        param.VlrLim = paramErp.VlrLim;
+                        param.LimApr = paramErp.LimApr;
+                        param.VlrPfa = paramErp.VlrPfa;
+                        param.DatMac = paramErp.DatMac;
+                        param.VlrMac = paramErp.VlrMac;
 
-                    param.CatCli = paramErp.CatCli;
-                    param.CodCpg = paramErp.CodCpg;
-                    param.CodFpg = paramErp.CodFpg;
-                    param.CodTpr = paramErp.CodTpr;
-                    param.PerDsc = paramErp.PerDsc;
-                    param.PerFre = paramErp.PerFre;
-                    param.PerIss = paramErp.PerIss;
-                    param.CifFob = paramErp.CifFob;
-                    param.CodTab = paramErp.CodTab;
+                        param.CatCli = paramErp.CatCli;
+                        param.CodCpg = paramErp.CodCpg;
+                        param.CodFpg = paramErp.CodFpg;
+                        param.CodTpr = paramErp.CodTpr;
+                        param.PerDsc = paramErp.PerDsc;
+                        param.PerFre = paramErp.PerFre;
+                        param.PerIss = paramErp.PerIss;
+                        param.CifFob = paramErp.CifFob;
+                        param.CodTab = paramErp.CodTab;
 
-                    param.SitReg = true;
-                    param.DatAtu = DateTime.UtcNow;
+                        param.SitReg = true;
+                        param.DatAtu = DateTime.UtcNow;
+                    }
+
                 }
             }
         }

@@ -21,6 +21,9 @@ public class ForcaVendasContext : DbContext
     public DbSet<ClienteParametrosFilial> ClienteParametrosFiliais { get; set; } = default!;
 
     public DbSet<Filial> Filiais => Set<Filial>();
+
+    public DbSet<Representante> Representantes => Set<Representante>();
+    public DbSet<RepresentanteParametrosEmpresa> RepresentanteParametrosEmpresas => Set<RepresentanteParametrosEmpresa>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -36,10 +39,10 @@ public class ForcaVendasContext : DbContext
 
         empFilInt.Property(e => e.CodFil)
             .IsRequired();
-            
 
-    empFilInt.Property(e => e.NomEmp)
-            .HasMaxLength(200);
+
+        empFilInt.Property(e => e.NomEmp)
+                .HasMaxLength(200);
 
         empFilInt.Property(e => e.NomFil)
             .HasMaxLength(200);
@@ -58,8 +61,10 @@ public class ForcaVendasContext : DbContext
             .IsUnique();
 
 
-       
+
+        // ============================
         // EMPRESA
+        // ============================
         var empresa = modelBuilder.Entity<Empresa>();
         empresa.ToTable("Empresas");
         empresa.HasKey(e => e.Id);
@@ -69,8 +74,10 @@ public class ForcaVendasContext : DbContext
         empresa.Property(e => e.NumCgc).HasMaxLength(20);
 
 
+
+        // ============================
         // FILIAL
-        // FILIAL
+        // ============================
         var filial = modelBuilder.Entity<Filial>();
         filial.ToTable("Filiais");
         filial.HasKey(f => f.Id);
@@ -100,7 +107,10 @@ public class ForcaVendasContext : DbContext
             .HasForeignKey(f => f.CodEmp);   // Filial.CodEmp
 
 
+
+        // ============================
         // CLIENTE
+        // ============================
         var cliente = modelBuilder.Entity<Cliente>();
         cliente.ToTable("Clientes");
         cliente.HasKey(c => c.Id);
@@ -134,12 +144,115 @@ public class ForcaVendasContext : DbContext
         cliPar.Property(x => x.CodTab).HasMaxLength(10);
         cliPar.Property(x => x.CodCpg).HasMaxLength(10);
 
+        // SitReg alinhado com NOT NULL + default 1 no banco
+        cliPar.Property(e => e.SitReg)
+              .HasDefaultValue(true)
+              .IsRequired();
+
         // Campos de controle
         cliPar.Property(x => x.SitReg).HasDefaultValue(true);
         cliPar.Property(x => x.DatCri).HasColumnType("datetime2");
         cliPar.Property(x => x.DatAtu).HasColumnType("datetime2");
 
+
+
+        // ============================
+        // REPRESENTANTE
+        // ============================
+        var rep = modelBuilder.Entity<Representante>();
+
+        rep.ToTable("Representante");
+        rep.HasKey(r => r.CodRep);
+
+        rep.Property(r => r.NomRep)
+            .IsRequired()
+            .HasMaxLength(150);
+
+        rep.Property(r => r.ApeRep)
+            .HasMaxLength(100);
+
+        rep.Property(r => r.BaiRep).HasMaxLength(100);
+        rep.Property(r => r.CidRep).HasMaxLength(100);
+        rep.Property(r => r.SigUfs).HasMaxLength(2);
+
+        rep.Property(r => r.EndRep).HasMaxLength(200);
+        rep.Property(r => r.CepRep).HasMaxLength(15);
+        rep.Property(r => r.CgcCpf).HasMaxLength(20);
+        rep.Property(r => r.InsEst).HasMaxLength(30);
+        rep.Property(r => r.InsMun).HasMaxLength(30);
+
+        rep.Property(r => r.FonRep).HasMaxLength(30);
+        rep.Property(r => r.FonRe2).HasMaxLength(30);
+        rep.Property(r => r.FonRe3).HasMaxLength(30);
+        rep.Property(r => r.FaxRep).HasMaxLength(30);
+
+        rep.Property(r => r.IntNet).HasMaxLength(150);
+        rep.Property(r => r.TipRep).HasMaxLength(1);
+        rep.Property(r => r.SitRep).HasMaxLength(1);
+        rep.Property(r => r.SitWmw).HasMaxLength(1);
+
+        rep.Property(r => r.CalIns).HasMaxLength(1);
+        rep.Property(r => r.CalIrf).HasMaxLength(1);
+        rep.Property(r => r.CalIss).HasMaxLength(1);
+        rep.Property(r => r.GerTit).HasMaxLength(1);
+
+        rep.Property(r => r.NumRge).HasMaxLength(50);
+        rep.Property(r => r.OrgRge).HasMaxLength(50);
+        rep.Property(r => r.EenRep).HasMaxLength(10);
+        rep.Property(r => r.CplEnd).HasMaxLength(100);
+        rep.Property(r => r.NenRep).HasMaxLength(50);
+        rep.Property(r => r.SenRep).HasMaxLength(50);
+        rep.Property(r => r.ZipCod).HasMaxLength(20);
+
+        rep.Property(r => r.SitReg).HasDefaultValue(true);
+        rep.Property(r => r.DatCri).HasColumnType("datetime2");
+        rep.Property(r => r.DatAtuApp).HasColumnType("datetime2");
+
+        // ============================
+        // REPRESENTANTE PARAMETROS EMPRESA
+        // ============================
+        var repParam = modelBuilder.Entity<RepresentanteParametrosEmpresa>();
+
+        repParam.ToTable("RepresentanteParametrosEmpresa");
+        repParam.HasKey(p => p.Id);
+
+        // índice único por empresa + representante
+        repParam
+            .HasIndex(p => new { p.CodEmp, p.CodRep })
+            .IsUnique();
+
+        // relacionamento com Representante
+        repParam
+            .HasOne<Representante>()
+            .WithMany() // se você tiver ICollection<RepresentanteParametrosEmpresa> no Representante, pode substituir por .WithMany(r => r.ParametrosEmpresas)
+            .HasForeignKey(p => p.CodRep);
+
+        // Alguns exemplos de tipos / tamanho (batendo com o CREATE que você já tem):
+        repParam.Property(p => p.PerCom).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.PerCos).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.ComFat).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.ComRec).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.PerIrf).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.PerIss).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.PerIns).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.VenVmp).HasColumnType("decimal(18,4)");
+        repParam.Property(p => p.RecVmt).HasColumnType("decimal(18,4)");
+
+        repParam.Property(p => p.CodRve).HasMaxLength(10);
+        repParam.Property(p => p.CodBan).HasMaxLength(20);
+        repParam.Property(p => p.CodAge).HasMaxLength(20);
+        repParam.Property(p => p.CcbRep).HasMaxLength(30);
+
+        repParam.Property(p => p.AvaObs).HasMaxLength(255);
+        repParam.Property(p => p.RepAud).HasMaxLength(30);
+
+        repParam.Property(p => p.SitReg).HasDefaultValue(true);
+        repParam.Property(p => p.DatCri).HasColumnType("datetime2");
+        repParam.Property(p => p.DatAtu).HasColumnType("datetime2");
+
+        // ============================
         // PRODUTO
+        // ============================
         var produto = modelBuilder.Entity<Produto>();
         produto.ToTable("Produtos");
         produto.HasKey(p => p.Id);

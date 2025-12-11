@@ -39,23 +39,35 @@ namespace ForcaVendas.Api.Background
                     var empFilSync = scope.ServiceProvider
                         .GetRequiredService<EmpresasFiliaisIntegradasSyncService>();
 
-              
+
                     await empFilSync.SincronizarAsync(stoppingToken);
                     _logger.LogInformation("Sincronização de Empresas/Filiais Integradas concluída.");
 
-                    _logger.LogInformation("Inciando Sincronia de Filial");
+
                     // SINCRONIZA CADASTO DE FILIAL
+                    _logger.LogInformation("Verificando Sincronia de Filial.");
                     var filialSync = scope.ServiceProvider.GetRequiredService<FiliaisSyncService>();
+
                     await filialSync.SincronizarFiliais(stoppingToken);
+                    _logger.LogInformation("Verificando Sincronia de Filial Concluida");
+
+
+                    _logger.LogInformation("Inciando Sincronia de Representante");
+                    // SINCRONIZA CADASTO DE FILIAL
+                    var repreSync = scope.ServiceProvider.GetRequiredService<RepresentanteSyncService>();
+                    await repreSync.BuscarRepresentantesAsync(stoppingToken);
+
+                    _logger.LogInformation("Inciando Sincronia de Representante Conccluida");
 
                     // 2️⃣ Sincroniza clientes
+                    _logger.LogInformation("Inciando Sincronia de Representante Clientes");
                     var cliSync = scope.ServiceProvider
                         .GetRequiredService<ClienteSyncService>();
 
                     await cliSync.SincronizarClientesAsync(stoppingToken);
                     _logger.LogInformation("Sincronização de Clientes concluída.");
 
-                   
+
                 }
                 catch (Exception ex)
                 {

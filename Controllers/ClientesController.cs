@@ -75,7 +75,7 @@ public class ClientesController : ControllerBase
             CgcCpf = dto.CgcCpf,
             CidCli = dto.CidCli,
             SigUfs = dto.SigUfs,
-            SitCli= true,
+            SitCli = true,
             DatCri = DateTime.UtcNow
         };
 

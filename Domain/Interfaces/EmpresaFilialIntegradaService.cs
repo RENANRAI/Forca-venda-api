@@ -5,6 +5,6 @@ namespace ForcaVendas.Api.Domain.Interfaces;
 public interface IEmpresasFiliaisIntegradasReader
 {
 
-     //tetse
+    //tetse
     Task<List<EmpresaFilialIntegrada>> ListarAtivasAsync();
 }

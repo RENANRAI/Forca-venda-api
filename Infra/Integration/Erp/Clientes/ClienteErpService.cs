@@ -51,7 +51,7 @@ public class ClienteErpService : IClienteErpService
 
             _logger.LogInformation("Resposta WS Clientes para Emp={CodEmp} Fil={CodFil}: {Xml}", codEmp, codFil, xml);
 
-            return ParseResposta(xml,codEmp,codFil);
+            return ParseResposta(xml, codEmp, codFil);
         }
         catch (Exception ex)
         {
@@ -211,6 +211,8 @@ public class ClienteErpService : IClienteErpService
                         PerIss = ToDecimal(h.Element("perIss")?.Value),
                         CifFob = h.Element("cifFob")?.Value?.Trim(),
                         CodTab = h.Element("codTab")?.Value?.Trim()
+
+
                     };
 
                     dto.ParametrosPorFilial.Add(param);
