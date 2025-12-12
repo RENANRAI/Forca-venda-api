@@ -1,7 +1,9 @@
 ﻿using ForcaVendas.Api.Domain.Services;
+using ForcaVendas.Api.Infra.Config;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ForcaVendas.Api.Background
 {
@@ -9,13 +11,18 @@ namespace ForcaVendas.Api.Background
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<IntegracoesBackgroundService> _logger;
+        private readonly ErpSeniorConfig _erpConfig;
+
+
 
         public IntegracoesBackgroundService(
             IServiceProvider serviceProvider,
-            ILogger<IntegracoesBackgroundService> logger)
+            ILogger<IntegracoesBackgroundService> logger, IOptions<ErpSeniorConfig> erpConfig)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;
+            _erpConfig = erpConfig.Value;
+
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -75,7 +82,7 @@ namespace ForcaVendas.Api.Background
                 }
 
                 // intervalo entre os ciclos
-                await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(_erpConfig.Defaults.SyncIntervalMinutes), stoppingToken);
             }
 
             _logger.LogInformation("Background de integrações finalizado.");

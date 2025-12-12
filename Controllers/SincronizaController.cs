@@ -1,5 +1,7 @@
 ﻿using ForcaVendas.Api.Domain.Services;
+using ForcaVendas.Api.Infra.Config;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Threading;
 
 namespace ForcaVendas.Api.Controllers;
@@ -12,17 +14,21 @@ public class IntegracaoController : ControllerBase
     private readonly EmpresasFiliaisIntegradasSyncService _empFilSync;
     private readonly FiliaisSyncService _filsync;
     private readonly RepresentanteSyncService _representanteSync;
+    private readonly ErpSeniorConfig _erpConfig;
+
 
 
 
     public IntegracaoController(ClienteSyncService clienteSync,
               EmpresasFiliaisIntegradasSyncService empFilSync,
-              FiliaisSyncService filsync, RepresentanteSyncService representanteSync)
+              FiliaisSyncService filsync, RepresentanteSyncService representanteSync, IOptions<ErpSeniorConfig> erpConfig)
     {
         _clienteSync = clienteSync;
         _empFilSync = empFilSync;
         _filsync = filsync;
         _representanteSync = representanteSync;
+        _erpConfig = erpConfig.Value;
+
 
     }
 

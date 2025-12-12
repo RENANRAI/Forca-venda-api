@@ -35,6 +35,12 @@ builder.Services.AddDbContext<ForcaVendasContext>(options =>
 builder.Services.Configure<ErpSeniorConfig>(
     builder.Configuration.GetSection("ErpSenior"));
 
+builder.Services.AddOptions<ErpSeniorConfig>()
+    .Bind(builder.Configuration.GetSection("SyncSettings"))
+    .ValidateDataAnnotations() // ativa validação automática
+    .ValidateOnStart();        // valida já na inicialização
+
+
 // HttpClient para o serviço SOAP de clientes
 builder.Services.AddHttpClient<IClienteErpService, ClienteErpService>();
 builder.Services.AddHttpClient<IFiliaisErpService, FiliaisErpService>();

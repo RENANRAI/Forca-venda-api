@@ -114,6 +114,22 @@ namespace ForcaVendas.Api.Infra.Integration.Erp.Representantes
                     return lista;
                 }
 
+                var erroExecNode = resultNode.Element("erroExecucao");
+                var erroExec = erroExecNode?.Value?.Trim();
+
+                if (!string.IsNullOrEmpty(erroExec))
+                {
+                    _logger.LogWarning(
+                        "WS Representantes emp={CodEmp}, retornou erroExecucao: {Erro}",
+                        codEmp, erroExec);
+
+                    // Aqui podemos simplesmente não trazer nada,
+                    // ou você pode decidir lançar Exception se quiser falhar a integração
+                    return lista;
+                }
+
+
+
                 var repsNodes = resultNode.Elements("representante");
 
                 foreach (var r in repsNodes)
