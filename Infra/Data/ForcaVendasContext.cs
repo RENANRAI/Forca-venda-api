@@ -163,6 +163,7 @@ public class ForcaVendasContext : DbContext
 
         rep.ToTable("Representante");
         rep.HasKey(r => r.CodRep);
+        rep.Property(r => r.CodRep).ValueGeneratedNever();
 
         rep.Property(r => r.NomRep)
             .IsRequired()
@@ -221,11 +222,11 @@ public class ForcaVendasContext : DbContext
             .HasIndex(p => new { p.CodEmp, p.CodRep })
             .IsUnique();
 
-        // relacionamento com Representante
         repParam
-            .HasOne<Representante>()
-            .WithMany() // se você tiver ICollection<RepresentanteParametrosEmpresa> no Representante, pode substituir por .WithMany(r => r.ParametrosEmpresas)
-            .HasForeignKey(p => p.CodRep);
+        .HasOne(p => p.Representante)
+        .WithMany(r => r.ParametrosPorEmpresa)
+        .HasForeignKey(p => p.CodRep)
+        .HasConstraintName("FK_RepParam_Representante");
 
         // Alguns exemplos de tipos / tamanho (batendo com o CREATE que você já tem):
         repParam.Property(p => p.PerCom).HasColumnType("decimal(18,4)");

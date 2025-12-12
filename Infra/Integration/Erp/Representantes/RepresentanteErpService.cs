@@ -83,7 +83,7 @@ namespace ForcaVendas.Api.Infra.Integration.Erp.Representantes
             sb.AppendLine(@"      <parameters>");
             sb.AppendLine($"        <codEmp>{codEmp}</codEmp>");
             sb.AppendLine($"        <codRep>{(codRep?.ToString() ?? "")}</codRep>");
-            sb.AppendLine(@"        <codFil></codFil>");
+            sb.AppendLine($"        <codfil>{codFil}</codfil>");
             sb.AppendLine($"        <identificadorSistema>{_defaults.IdentificadorSistema}</identificadorSistema>");
             sb.AppendLine($"        <quantidadeRegistros>{_defaults.QuantidadeRegistros}</quantidadeRegistros>");
             sb.AppendLine($"        <tipoIntegracao>{_defaults.TipoIntegracao}</tipoIntegracao>");
@@ -118,7 +118,16 @@ namespace ForcaVendas.Api.Infra.Integration.Erp.Representantes
 
                 foreach (var r in repsNodes)
                 {
-                    int codRep = int.Parse(r.Element("codRep")?.Value ?? "0");
+                    var codRepStr = r.Element("codRep")?.Value;
+
+                    if (!int.TryParse(codRepStr, out var codRep) || codRep <= 0)
+                    {
+                        // Loga e ignora esse registro inválido
+                        _logger.LogWarning("Representante com codRep inválido: '{CodRepStr}' - nó ignorado.", codRepStr);
+                        continue;
+                    }
+
+
 
                     var dto = new RepresentanteErpDto
                     {

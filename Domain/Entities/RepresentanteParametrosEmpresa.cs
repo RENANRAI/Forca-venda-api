@@ -1,4 +1,6 @@
 ﻿// Domain/Entities/RepresentanteParametrosEmpresa.cs
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ForcaVendas.Api.Domain.Entities;
 
 public class RepresentanteParametrosEmpresa
@@ -96,5 +98,6 @@ public class RepresentanteParametrosEmpresa
     public DateTime DatCri { get; set; }
     public DateTime? DatAtu { get; set; }
 
+    [ForeignKey(nameof(CodRep))]
     public Representante Representante { get; set; } = null!;
 }

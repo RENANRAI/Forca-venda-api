@@ -64,4 +64,5 @@ public class Representante
     // Navegação
     public ICollection<RepresentanteParametrosEmpresa> ParametrosPorEmpresa { get; set; }
         = new List<RepresentanteParametrosEmpresa>();
+
 }
